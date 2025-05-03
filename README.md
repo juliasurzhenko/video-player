@@ -10,6 +10,24 @@
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/R2FmIQVcdT)
 
+## Dev Run 
+
+Frontend part:
+
+```sh
+npx nx serve video-player
+```
+
+Backend part:
+
+```sh
+npx nx serve api
+```
+Both
+
+```sh
+npm run start
+```
 
 ## Run tasks
 
