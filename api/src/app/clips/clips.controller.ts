@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ClipsService } from './clips.service';
 import { CreateClipDto } from './dto/create-clip.dto';
@@ -21,13 +22,18 @@ export class ClipsController {
   }
 
   @Get()
-  findAll() {
-    return this.clipsService.findAll();
+  async findAll(    
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+    @Query('sortBy') sortBy: string = 'date',
+    @Query('sortDirection') sortDirection: 'asc' | 'desc' = 'desc',
+  ) {
+  return this.clipsService.findAll(page, limit, sortBy, sortDirection);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clipsService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    return this.clipsService.findOne(id);
   }
 
   @Patch(':id')

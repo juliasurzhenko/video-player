@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateClipDto } from './dto/create-clip.dto';
 import { UpdateClipDto } from './dto/update-clip.dto';
+import axios from 'axios';
 
 @Injectable()
 export class ClipsService {
@@ -8,12 +9,36 @@ export class ClipsService {
     return 'This action adds a new clip';
   }
 
-  findAll() {
-    return `This action returns all clips`;
+  async findAll(
+    page: number = 1, 
+    limit: number = 10, 
+    sortBy: string = 'date', 
+    sortDirection: 'asc' | 'desc' = 'desc'
+  ) {
+    try {
+      const response = await axios.get(process.env.API_URL, {
+        params: {
+          page,
+          limit,
+          sortBy,
+          sortDirection,
+        },
+      });
+      return response.data; // повертаємо отримані дані
+    } catch (error) {
+      throw new Error('Error fetching clips');
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} clip`;
+  async findOne(id: number) {
+    try {
+      const response = await axios.get(`${process.env.API_URL}`, {
+        params: { id },
+      });
+      return response.data; // повертаємо відео за id
+    } catch (error) {
+      throw new Error(`Error fetching video with id ${id}`);
+    }
   }
 
   update(id: number, updateClipDto: UpdateClipDto) {
