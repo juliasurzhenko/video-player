@@ -11,6 +11,7 @@ import {
 import { ClipsService } from './clips.service';
 import { CreateClipDto } from './dto/create-clip.dto';
 import { UpdateClipDto } from './dto/update-clip.dto';
+import { Clip } from '@video-player/shared/interfaces';
 
 @Controller('clips')
 export class ClipsController {
@@ -25,11 +26,13 @@ export class ClipsController {
   async findAll(    
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10,
-    @Query('sortBy') sortBy: string = 'date',
+    @Query('sortBy') sortBy: string = 'id',
     @Query('sortDirection') sortDirection: 'asc' | 'desc' = 'desc',
   ) {
-  return this.clipsService.findAll(page, limit, sortBy, sortDirection);
-  }
+    const allowedSortBy: (keyof Clip)[] = ['id'];
+    const safeSortBy: keyof Clip = allowedSortBy.includes(sortBy as keyof Clip) ? sortBy as keyof Clip : 'id';
+  
+    return this.clipsService.findAll(page, limit, safeSortBy, sortDirection);  }
 
   @Get(':id')
   async findOne(@Param('id') id: number) {
