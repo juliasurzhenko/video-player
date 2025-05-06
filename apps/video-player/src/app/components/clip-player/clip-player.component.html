@@ -1,0 +1,12 @@
+<div *ngIf="selectedClip" class="w-full">
+    <video
+      #clipVideo
+      class="w-full rounded-xl"
+      controls
+      loop
+      autoplay
+      muted
+      playsinline
+      [src]="selectedClip.url"
+    ></video>
+</div>

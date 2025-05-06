@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="flex h-[calc(100vh-64px)]">
+    <div class="w-4/6 p-4 overflow-y-auto" [ngClass]="clipId ? 'w-full' : 'w-auto'">
+      <app-clip-player [clipId]="clipId"></app-clip-player>
+    </div>
+    <div class="w-2/6 p-4 border-l overflow-y-auto" *ngIf="!clipId" #scrollContainer>
+      <app-clips-list></app-clips-list>
+    </div>
+</div>
