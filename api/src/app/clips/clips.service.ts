@@ -37,6 +37,7 @@ export class ClipsService {
       const totalPages = Math.ceil(totalItems / safeLimit);
       const offset = (page - 1) * safeLimit;
       const paginatedItems = sortedItems.slice(offset, offset + safeLimit);
+      // this.findOne(31);
   
       return {
         items: paginatedItems,
@@ -54,9 +55,7 @@ export class ClipsService {
 
   async findOne(id: number): Promise<Clip> {
     try {
-      const response = await axios.get<Clip>(`${process.env.API_URL}`, {
-        params: { id },
-      });
+      const response = await axios.get<Clip>(`${process.env.API_URL}=${id}`);
       return response.data;
     } catch (error) {
       throw new Error(`Error fetching video with id ${id}`);

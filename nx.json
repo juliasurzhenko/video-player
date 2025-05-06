@@ -39,6 +39,9 @@
       "linter": "eslint",
       "style": "css",
       "unitTestRunner": "vitest"
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
   },
   "plugins": [
@@ -72,5 +75,13 @@
         "watchDepsTargetName": "watch-deps"
       }
     }
-  ]
+  ],
+  "projects": {
+    "video-player": {
+      "tags": [],
+      "root": "apps/video-player",
+      "sourceRoot": "apps/video-player/src",
+      "projectType": "application"
+    }
+  }
 }
