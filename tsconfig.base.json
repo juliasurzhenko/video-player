@@ -16,9 +16,11 @@
     "baseUrl": ".",
     "paths": {
       "@video-player/libs": ["libs/src/index.ts"],
-      "@video-player/utils": ["shared/utils/src/index.ts"],
+      "@video-player/shared/interfaces": [
+        "libs/shared/interfaces/src/index.ts"
+      ],
       "@video-player/shared/utils": ["libs/shared/utils/src/index.ts"],
-      "@video-player/shared/interfaces": ["libs/shared/interfaces/src/index.ts"]
+      "@video-player/utils": ["shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
